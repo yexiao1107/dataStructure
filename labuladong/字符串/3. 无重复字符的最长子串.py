@@ -45,3 +45,8 @@ class Solution(object):
                 window[d] = window.get(d, 0) - 1
             res = max(res, right - left)
         return res
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.lengthOfLongestSubstring("pwwkew"))
