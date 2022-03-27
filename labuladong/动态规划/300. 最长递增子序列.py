@@ -37,7 +37,5 @@ class Solution(object):
             for j in range(i):
                 if nums[i] > nums[j]:
                     dp[i] = max(dp[i], dp[j] + 1)
-        res = 1
-        for item in dp:
-            res = max(res, item)
-        return res
+    
+        return max(dp)
