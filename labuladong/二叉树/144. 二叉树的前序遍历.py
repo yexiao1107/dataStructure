@@ -60,3 +60,29 @@ class Solution:
             else:
                 node = stack.pop()
         return res
+
+    def traverse(self, root):
+        def pushLeft(p):
+            '''
+            左子树压栈到底
+            '''
+            while p:
+                ##前序遍历的位置
+                self.stack.append(p)
+                p = p.left
+
+        self.res = []
+        self.stack = []
+        visited = TreeNode(-1)##定义上一次遍历的子树根节点
+        pushLeft(root)
+
+        while self.stack:
+            cur = self.stack[-1]
+            if (cur.left == None or cur.left == visited) and cur.right != visited:
+                ##中序遍历位置
+                pushLeft(cur.right)
+            if cur.right == None or cur.right==visited:
+                ##后续遍历的位置
+                visited = self.stack.pop()
+        return self.res
+

@@ -85,6 +85,5 @@ class Solution(object):
                     if down not in visited:
                         queue.append(down)
                         visited.add(down)
-                    minusOne(res[j], j)
             step += 1
         return -1
