@@ -33,6 +33,9 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
+        '''
+        头插法
+        '''
         if head is None or head.next is None:
             return head
         dump = ListNode(-1)
@@ -45,3 +48,12 @@ class Solution:
             dump.next = cur_node
             cur_node = pre_node.next
         return dump.next
+
+    def reverseList2(self, head: ListNode) -> ListNode:
+        pre, cur = None, head
+        while cur:
+            tmp = cur.next
+            cur.next = pre
+            pre = cur
+            cur = tmp
+        return pre

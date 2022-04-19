@@ -32,6 +32,7 @@ class ListNode(object):
 class Solution(object):
     def deleteDuplicates(self, head):
         """
+        快慢指针，不太好扩展
         :type head: ListNode
         :rtype: ListNode
         """
@@ -43,4 +44,18 @@ class Solution(object):
                 slow = slow.next
             fast = fast.next
         slow.next = None
+        return head
+
+    def deleteDuplicates2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if head == None: return None
+        cur = head
+        while cur.next:
+            if cur.val == cur.next.val:
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
         return head

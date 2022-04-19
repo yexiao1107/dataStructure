@@ -34,3 +34,16 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
+        def dp(root):
+            '''
+            [no_r, r], index0表示不抢， index1表示抢
+            '''
+            if root == None: return [0, 0]
+            left = dp(root.left)
+            right = dp(root.right)
+            r = root.val + left[0] + right[0]
+            no_r = max(left[0], left[1]) + max(right[0], right[1])
+            return [no_r, r]
+
+        res = dp(root)
+        return max(res[0], res[1])

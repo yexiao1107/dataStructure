@@ -20,15 +20,24 @@
 
 '''
 class Solution(object):
+    def __init__(self, nums):
+        self.memo = [-1] * len(nums)
     def rob(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        dp_i = 0
+        dp_i = 0#表示从第i个房子开始抢dp[i] = max(dp[i+1], nums[i]+dp[i+2])
         dp_i_1, dp_i_2 = 0, 0
         for i in range(len(nums) - 1, -1, -1):
             dp_i = max(dp_i_1, dp_i_2 + nums[i])
             dp_i_2 = dp_i_1
             dp_i_1 = dp_i
         return dp_i
+
+    def dp(self, nums, start):
+        if start > len(nums): return 0
+        if self.memo[start] != -1: return self.memo[start]
+        res = max(self.dp(nums, start + 1), self.dp(nums, start + 2) + nums[start])
+        self.memo[start] = res
+        return res
