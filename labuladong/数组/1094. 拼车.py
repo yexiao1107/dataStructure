@@ -62,8 +62,8 @@ class Diff():
 
 class Solution:
     def carPooling(self, trips: [[int]], capacity: int) -> bool:
-        res = [0] * 1001
-        diff = Diff(res)
+        nums = [0] * 1001
+        diff = Diff(nums)
         for trip in trips:
             num, start, end = trip[0], trip[1], trip[2] - 1
             diff.incer_num(start, end, num)

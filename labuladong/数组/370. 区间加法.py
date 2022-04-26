@@ -46,7 +46,7 @@ class Diff():
     def result(self):
         res = [0] * len(self.diff)
         res[0] = self.diff[0]
-        for i in range(len(self.diff)):
+        for i in range(1, len(self.diff)):
             res[i] = res[i - 1] + self.diff[i]
         return res
 
