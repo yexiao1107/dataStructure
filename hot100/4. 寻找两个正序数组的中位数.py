@@ -28,6 +28,8 @@ nums2.length == n
 1 <= m + n <= 2000
 -106 <= nums1[i], nums2[i] <= 106
 '''
+
+
 class Solution(object):
     def findMedianSortedArrays(self, nums1, nums2):
         """
@@ -41,9 +43,6 @@ class Solution(object):
         infinty = 2 ** 40
         m, n = len(nums1), len(nums2)
         left, right = 0, m
-        # median1：前一部分的最大值
-        # median2：后一部分的最小值
-        median1, median2 = 0, 0
 
         while left <= right:
             # 前一部分包含 nums1[0 .. i-1] 和 nums2[0 .. j-1]
@@ -52,15 +51,18 @@ class Solution(object):
             j = (m + n + 1) // 2 - i
 
             # nums_im1, nums_i, nums_jm1, nums_j 分别表示 nums1[i-1], nums1[i], nums2[j-1], nums2[j]
-            nums_im1 = (-infinty if i == 0 else nums1[i - 1])
-            nums_i = (infinty if i == m else nums1[i])
-            nums_jm1 = (-infinty if j == 0 else nums2[j - 1])
-            nums_j = (infinty if j == n else nums2[j])
+            max_leftA = (-infinty if i == 0 else nums1[i - 1])
+            min_rightA = (infinty if i == m else nums1[i])
+            max_leftB = (-infinty if j == 0 else nums2[j - 1])
+            min_rightB = (infinty if j == n else nums2[j])
 
-            if nums_im1 <= nums_j:
-                median1, median2 = max(nums_im1, nums_jm1), min(nums_i, nums_j)
-                left = i + 1
-            else:
+            if max_leftA <= min_rightB and min_rightA >= max_leftB:
+                if (m + n) % 2 != 0:
+                    return max(max_leftA, max_leftB)
+                else:
+                    return (max(max_leftA, max_leftB) + min(min_rightA, min_rightB)) / 2.0
+            elif max_leftA > min_rightB:
                 right = i - 1
-
-        return (median1 + median2) / 2 if (m + n) % 2 == 0 else median1
+            else:
+                left = i + 1
+        return 0.0
