@@ -36,6 +36,9 @@ class Solution(object):
         若 nums[mid] < target <= nums[right]，说明 target 位于右侧区间。令 left = mid+1，在右侧区间查找
         否则，令 right = mid-1，在左侧区间查找
         注意：区间收缩时不包含 mid，也就是说，实际收缩后的区间是 [left,mid) 或者 (mid,right]
+
+        将数组一分为二，其中一定有一个是有序的，另一个可能是有序，也能是部分有序。
+        此时有序部分用二分法查找。无序部分再一分为二，其中一个一定有序，另一个可能有序，可能无序。就这样循环.
         """
         l, r = 0, len(nums) - 1
         while l <= r:
